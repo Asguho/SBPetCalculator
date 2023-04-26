@@ -53,7 +53,9 @@ getPets().then((pets) => {
   sorted.sort(function (a, b) {
     return a.profitPerExp - b.profitPerExp;
   });
-  console.log(JSON.stringify(sorted[sorted.length - 1]));
+  for (var i = sorted.length - 1; i >= 0; i--) {
+    console.log(sorted[i].item_name + " | " + sorted[i].tier.toLowerCase() + " | " + sorted[i].profitPerExp);
+  }
 });
 
 function getExpToMaxLvl(level, offsetRarity, maxLevel) {
