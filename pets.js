@@ -36,12 +36,7 @@ export async function getPets() {
       action.ExpToMaxLvl = getExpToMaxLvl(action.lvl, action.tier.toLowerCase(), action.maxLevel);
       action.profit = action.maxPrice - action.starting_bid;
       action.profitPerExp = action.profit / action.ExpToMaxLvl;
-      if (
-        action.profitPerExp > 0 &&
-        action.profit > 0 &&
-        action.ExpToMaxLvl > 0 &&
-        !hasUsedPetCandy(action.item.lore)
-      ) {
+      if (action.profitPerExp && action.profit && action.ExpToMaxLvl && !hasUsedPetCandy(action.item.lore)) {
         pets.push(action);
       }
     }
