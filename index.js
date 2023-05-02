@@ -4,7 +4,8 @@ import { getPets } from "./pets.js";
 const app = new Application();
 
 app.use(async (ctx) => {
-  let res = "Pet Name | Tier | Profit/Exp | Profit | Starting Bid\n";
+  const date = new Date();
+  let res = `Generated at ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} \nPet Name | Tier | Profit/Exp | Profit | Starting Bid\n`;
   const sorted = (await getPets()).slice(0);
   sorted.sort(function (a, b) {
     return a.profitPerExp - b.profitPerExp;
@@ -15,12 +16,12 @@ app.use(async (ctx) => {
       " | " +
       sorted[i].tier.toLowerCase() +
       " | " +
-      sorted[i].profitPerExp +
+      Math.round(sorted[i].profitPerExp * 100) / 100 +
       " | " +
-      sorted[i].profit +
-      " | " +
-      sorted[i].starting_bid +
-      "\n";
+      Math.round((sorted[i].profit / 1000000) * 100) / 100 +
+      "m | " +
+      Math.round((sorted[i].starting_bid / 1000000) * 100) / 100 +
+      "m\n";
   }
   ctx.response.body = res;
 });
