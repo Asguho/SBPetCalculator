@@ -19,7 +19,7 @@ async function getPrices() {
 export async function getPets() {
   const actions = await getActions();
   const prices = await getPrices();
-  let pets = [];
+  const pets = [];
   for (const action of actions) {
     if (action.item?.attributes?.id == "PET") {
       action.maxLevel = constants.PET_DATA[action.item_name.split(" ")[2].toUpperCase()]?.maxLevel;
